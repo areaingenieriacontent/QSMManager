@@ -1,0 +1,29 @@
+﻿@model IEnumerable<QSM_Manager.Models.Grupo>
+
+@{
+    ViewBag.Title = "Grupo a matricular";
+}
+
+<h2>IndexMódulo</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_grupo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_grupo)
+            </td>
+            <td>
+                @Html.ActionLink("Matricular Grupo", "ModuloGrupo", new { grupo_id = item.id_grupo })
+            </td>
+        </tr>
+    }
+
+</table>

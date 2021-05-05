@@ -1,0 +1,76 @@
+﻿@model IEnumerable<QSM_Manager.Models.modulo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_modulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion_modulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tiempo_certificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad_preguntas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.habilitado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.porcentaje_certificacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.score_model_id)
+        </th>
+        <th>
+            @*change for enterprise name*@
+            @Html.DisplayNameFor(model => model.empresa.nit)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_modulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion_modulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tiempo_certificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad_preguntas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.habilitado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.porcentaje_certificacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.score_model_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.empresa.nit)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.modulo_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.modulo_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.modulo_id })
+        </td>
+    </tr>
+}
+
+</table>

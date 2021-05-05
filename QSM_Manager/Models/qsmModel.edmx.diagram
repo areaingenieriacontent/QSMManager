@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="783ba94651424105ba412c9de98a0f55" Name="Diagram1">
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.empresa" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.Grupo" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.matricula" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.modulo" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.pregunta" Width="1.5" PointX="7.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.respuesta_pregunta" Width="1.5" PointX="9.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.session_certificado" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.subcategoria" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.tipo_pregunta" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.tipo_usuario" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuienSabeMasDBModel.usuario" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_modulo_empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_usuario_empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_usuario_Grupo" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_matricula_modulo" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_matricula_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_session_certificado_modulo" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_subcategoria_modulo" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_pregunta_subcategoria" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_pregunta_tipo_pregunta" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_respuesta_pregunta_pregunta" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_session_certificado_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.FK_usuario_tipo_usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="QuienSabeMasDBModel.respuesta_usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

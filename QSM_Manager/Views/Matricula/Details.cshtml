@@ -1,0 +1,29 @@
+﻿@model QSM_Manager.ViewModel.MatriculaViewModel 
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Módulo
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @for(int cont=0;cont<Model.enrollments.Count;cont++)
+    {
+        <tr>
+            <td>
+                @Model.enrollments[cont].modulo.nombre_modulo
+            </td>
+            <td>
+                @Html.ActionLink("Desmatricular", "Desmatricular", new {userId=Model.enrollments[cont].usuario_id, modId=Model.enrollments[cont].modulo_id })
+            </td>
+        </tr>
+    }
+
+</table>

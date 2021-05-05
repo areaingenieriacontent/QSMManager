@@ -1,0 +1,1079 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QuienSabeMasDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="empresa">
+          <Key>
+            <PropertyRef Name="empresa_id" />
+          </Key>
+          <Property Name="empresa_id" Type="int" Nullable="false" />
+          <Property Name="nit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre_empresa" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion_descripcion" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+          </Key>
+          <Property Name="id_grupo" Type="int" Nullable="false" />
+          <Property Name="nombre_grupo" Type="nvarchar(max)" />
+          <Property Name="habilitar_grupo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="matricula">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+            <PropertyRef Name="modulo_id" />
+          </Key>
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+          <Property Name="modulo_id" Type="int" Nullable="false" />
+          <Property Name="habilitado" Type="int" Nullable="false" />
+          <Property Name="intentos" Type="int" />
+        </EntityType>
+        <EntityType Name="modulo">
+          <Key>
+            <PropertyRef Name="modulo_id" />
+          </Key>
+          <Property Name="modulo_id" Type="int" Nullable="false" />
+          <Property Name="empresa_id" Type="int" Nullable="false" />
+          <Property Name="nombre_modulo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion_modulo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="tiempo_certificacion" Type="int" Nullable="false" />
+          <Property Name="cantidad_preguntas" Type="int" Nullable="false" />
+          <Property Name="habilitado" Type="int" Nullable="false" />
+          <Property Name="porcentaje_certificacion" Type="float" Nullable="false" />
+          <Property Name="score_model_id" Type="int" />
+        </EntityType>
+        <EntityType Name="pregunta">
+          <Key>
+            <PropertyRef Name="pregunta_id" />
+          </Key>
+          <Property Name="pregunta_id" Type="int" Nullable="false" />
+          <Property Name="subcategoria_id" Type="int" Nullable="false" />
+          <Property Name="tipo_pregunta_id" Type="int" Nullable="false" />
+          <Property Name="enunciado_pregunta" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="valor_pregunta" Type="float" />
+          <Property Name="tiene_imagen" Type="int" />
+          <Property Name="imagen_url" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="respuesta_pregunta">
+          <Key>
+            <PropertyRef Name="respuesta_pregunta_id" />
+          </Key>
+          <Property Name="respuesta_pregunta_id" Type="int" Nullable="false" />
+          <Property Name="pregunta_id" Type="int" Nullable="false" />
+          <Property Name="enunciado_respuesta" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="respuesta_correcta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="respuesta_usuario">
+          <Key>
+            <PropertyRef Name="session_certificado_id" />
+            <PropertyRef Name="respuesta_pregunta_id" />
+          </Key>
+          <Property Name="session_certificado_id" Type="int" Nullable="false" />
+          <Property Name="respuesta_pregunta_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="session_certificado">
+          <Key>
+            <PropertyRef Name="session_certificado_id" />
+          </Key>
+          <Property Name="session_certificado_id" Type="int" Nullable="false" />
+          <Property Name="modulo_id" Type="int" Nullable="false" />
+          <Property Name="inicio_session" Type="datetime" Nullable="false" />
+          <Property Name="final_session" Type="datetime" Nullable="false" />
+          <Property Name="certificado" Type="int" Nullable="false" />
+          <Property Name="ayuda50" Type="int" Nullable="false" />
+          <Property Name="ayuda_publico" Type="int" Nullable="false" />
+          <Property Name="ayuda_cambio" Type="int" Nullable="false" />
+          <Property Name="usuario_id" Type="int" />
+        </EntityType>
+        <EntityType Name="subcategoria">
+          <Key>
+            <PropertyRef Name="subcategoria_id" />
+          </Key>
+          <Property Name="subcategoria_id" Type="int" Nullable="false" />
+          <Property Name="modulo_id" Type="int" Nullable="false" />
+          <Property Name="nombre_subcategoria" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion_subcategoria" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="habilitada" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tipo_pregunta">
+          <Key>
+            <PropertyRef Name="tipo_pregunta_id" />
+          </Key>
+          <Property Name="tipo_pregunta_id" Type="int" Nullable="false" />
+          <Property Name="tipo_pregunta_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_usuario">
+          <Key>
+            <PropertyRef Name="tipo_usuario_id" />
+          </Key>
+          <Property Name="tipo_usuario_id" Type="int" Nullable="false" />
+          <Property Name="nombre_tipo_usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="int" Nullable="false" />
+          <Property Name="empresa_id" Type="int" Nullable="false" />
+          <Property Name="tipo_usuario_id" Type="int" Nullable="false" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="documento_identificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha_nacimiento" Type="datetime" />
+          <Property Name="sexo" Type="int" Nullable="false" />
+          <Property Name="fecha_registro" Type="datetime" />
+          <Property Name="ultimo_ingreso" Type="datetime" />
+          <Property Name="correo" Type="nvarchar" MaxLength="50" />
+          <Property Name="grupo_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_matricula_modulo">
+          <End Role="modulo" Type="Self.modulo" Multiplicity="1" />
+          <End Role="matricula" Type="Self.matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modulo">
+              <PropertyRef Name="modulo_id" />
+            </Principal>
+            <Dependent Role="matricula">
+              <PropertyRef Name="modulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_matricula_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="matricula" Type="Self.matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="matricula">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_modulo_empresa">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="1" />
+          <End Role="modulo" Type="Self.modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="empresa_id" />
+            </Principal>
+            <Dependent Role="modulo">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pregunta_subcategoria">
+          <End Role="subcategoria" Type="Self.subcategoria" Multiplicity="1" />
+          <End Role="pregunta" Type="Self.pregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subcategoria">
+              <PropertyRef Name="subcategoria_id" />
+            </Principal>
+            <Dependent Role="pregunta">
+              <PropertyRef Name="subcategoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pregunta_tipo_pregunta">
+          <End Role="tipo_pregunta" Type="Self.tipo_pregunta" Multiplicity="1" />
+          <End Role="pregunta" Type="Self.pregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_pregunta">
+              <PropertyRef Name="tipo_pregunta_id" />
+            </Principal>
+            <Dependent Role="pregunta">
+              <PropertyRef Name="tipo_pregunta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_respuesta_pregunta_pregunta">
+          <End Role="pregunta" Type="Self.pregunta" Multiplicity="1" />
+          <End Role="respuesta_pregunta" Type="Self.respuesta_pregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pregunta">
+              <PropertyRef Name="pregunta_id" />
+            </Principal>
+            <Dependent Role="respuesta_pregunta">
+              <PropertyRef Name="pregunta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_respuesta_usuario_respuesta_pregunta">
+          <End Role="respuesta_pregunta" Type="Self.respuesta_pregunta" Multiplicity="1" />
+          <End Role="respuesta_usuario" Type="Self.respuesta_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="respuesta_pregunta">
+              <PropertyRef Name="respuesta_pregunta_id" />
+            </Principal>
+            <Dependent Role="respuesta_usuario">
+              <PropertyRef Name="respuesta_pregunta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_respuesta_usuario_session_certificado">
+          <End Role="session_certificado" Type="Self.session_certificado" Multiplicity="1" />
+          <End Role="respuesta_usuario" Type="Self.respuesta_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="session_certificado">
+              <PropertyRef Name="session_certificado_id" />
+            </Principal>
+            <Dependent Role="respuesta_usuario">
+              <PropertyRef Name="session_certificado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_session_certificado_modulo">
+          <End Role="modulo" Type="Self.modulo" Multiplicity="1" />
+          <End Role="session_certificado" Type="Self.session_certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modulo">
+              <PropertyRef Name="modulo_id" />
+            </Principal>
+            <Dependent Role="session_certificado">
+              <PropertyRef Name="modulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_session_certificado_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="session_certificado" Type="Self.session_certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="session_certificado">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subcategoria_modulo">
+          <End Role="modulo" Type="Self.modulo" Multiplicity="1" />
+          <End Role="subcategoria" Type="Self.subcategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modulo">
+              <PropertyRef Name="modulo_id" />
+            </Principal>
+            <Dependent Role="subcategoria">
+              <PropertyRef Name="modulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_empresa">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="empresa_id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="grupo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_tipo_usuario">
+          <End Role="tipo_usuario" Type="Self.tipo_usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_usuario">
+              <PropertyRef Name="tipo_usuario_id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="tipo_usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="actualizar_session_certificado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sessionId" Type="int" Mode="In" />
+          <Parameter Name="help50" Type="int" Mode="In" />
+          <Parameter Name="helpAud" Type="int" Mode="In" />
+          <Parameter Name="helpChange" Type="int" Mode="In" />
+          <Parameter Name="certification" Type="int" Mode="In" />
+        </Function>
+        <Function Name="crear_session_certificado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="modId" Type="int" Mode="In" />
+          <Parameter Name="help50" Type="int" Mode="In" />
+          <Parameter Name="helpAud" Type="int" Mode="In" />
+          <Parameter Name="helpChange" Type="int" Mode="In" />
+          <Parameter Name="timeSession" Type="int" Mode="In" />
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="toReturnValue" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="insert_user_answer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sessionId" Type="int" Mode="In" />
+          <Parameter Name="answerId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="read_user_tries" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userId" Type="int" Mode="In" />
+          <Parameter Name="moduleId" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="QuienSabeMasDBModelStoreContainer">
+          <EntitySet Name="empresa" EntityType="Self.empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="matricula" EntityType="Self.matricula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="modulo" EntityType="Self.modulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pregunta" EntityType="Self.pregunta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="respuesta_pregunta" EntityType="Self.respuesta_pregunta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="respuesta_usuario" EntityType="Self.respuesta_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="session_certificado" EntityType="Self.session_certificado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subcategoria" EntityType="Self.subcategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_pregunta" EntityType="Self.tipo_pregunta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_usuario" EntityType="Self.tipo_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_matricula_modulo" Association="Self.FK_matricula_modulo">
+            <End Role="modulo" EntitySet="modulo" />
+            <End Role="matricula" EntitySet="matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_matricula_usuario" Association="Self.FK_matricula_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="matricula" EntitySet="matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_modulo_empresa" Association="Self.FK_modulo_empresa">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="modulo" EntitySet="modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pregunta_subcategoria" Association="Self.FK_pregunta_subcategoria">
+            <End Role="subcategoria" EntitySet="subcategoria" />
+            <End Role="pregunta" EntitySet="pregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pregunta_tipo_pregunta" Association="Self.FK_pregunta_tipo_pregunta">
+            <End Role="tipo_pregunta" EntitySet="tipo_pregunta" />
+            <End Role="pregunta" EntitySet="pregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_respuesta_pregunta_pregunta" Association="Self.FK_respuesta_pregunta_pregunta">
+            <End Role="pregunta" EntitySet="pregunta" />
+            <End Role="respuesta_pregunta" EntitySet="respuesta_pregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_respuesta_usuario_respuesta_pregunta" Association="Self.FK_respuesta_usuario_respuesta_pregunta">
+            <End Role="respuesta_pregunta" EntitySet="respuesta_pregunta" />
+            <End Role="respuesta_usuario" EntitySet="respuesta_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_respuesta_usuario_session_certificado" Association="Self.FK_respuesta_usuario_session_certificado">
+            <End Role="session_certificado" EntitySet="session_certificado" />
+            <End Role="respuesta_usuario" EntitySet="respuesta_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_certificado_modulo" Association="Self.FK_session_certificado_modulo">
+            <End Role="modulo" EntitySet="modulo" />
+            <End Role="session_certificado" EntitySet="session_certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_certificado_usuario" Association="Self.FK_session_certificado_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="session_certificado" EntitySet="session_certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subcategoria_modulo" Association="Self.FK_subcategoria_modulo">
+            <End Role="modulo" EntitySet="modulo" />
+            <End Role="subcategoria" EntitySet="subcategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_empresa" Association="Self.FK_usuario_empresa">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_Grupo" Association="Self.FK_usuario_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_tipo_usuario" Association="Self.FK_usuario_tipo_usuario">
+            <End Role="tipo_usuario" EntitySet="tipo_usuario" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuienSabeMasDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="empresa">
+          <Key>
+            <PropertyRef Name="empresa_id" />
+          </Key>
+          <Property Name="empresa_id" Type="Int32" Nullable="false" />
+          <Property Name="nit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre_empresa" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion_descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="modulo" Relationship="Self.FK_modulo_empresa" FromRole="empresa" ToRole="modulo" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_empresa" FromRole="empresa" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="Grupo">
+          <Key>
+            <PropertyRef Name="id_grupo" />
+          </Key>
+          <Property Name="id_grupo" Type="Int32" Nullable="false" />
+          <Property Name="nombre_grupo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="habilitar_grupo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_Grupo" FromRole="Grupo" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="matricula">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+            <PropertyRef Name="modulo_id" />
+          </Key>
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="modulo_id" Type="Int32" Nullable="false" />
+          <Property Name="habilitado" Type="Int32" Nullable="false" />
+          <Property Name="intentos" Type="Int32" />
+          <NavigationProperty Name="modulo" Relationship="Self.FK_matricula_modulo" FromRole="matricula" ToRole="modulo" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_matricula_usuario" FromRole="matricula" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="modulo">
+          <Key>
+            <PropertyRef Name="modulo_id" />
+          </Key>
+          <Property Name="modulo_id" Type="Int32" Nullable="false" />
+          <Property Name="empresa_id" Type="Int32" Nullable="false" />
+          <Property Name="nombre_modulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion_modulo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tiempo_certificacion" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_preguntas" Type="Int32" Nullable="false" />
+          <Property Name="habilitado" Type="Int32" Nullable="false" />
+          <Property Name="porcentaje_certificacion" Type="Double" Nullable="false" />
+          <Property Name="score_model_id" Type="Int32" />
+          <NavigationProperty Name="empresa" Relationship="Self.FK_modulo_empresa" FromRole="modulo" ToRole="empresa" />
+          <NavigationProperty Name="matricula" Relationship="Self.FK_matricula_modulo" FromRole="modulo" ToRole="matricula" />
+          <NavigationProperty Name="session_certificado" Relationship="Self.FK_session_certificado_modulo" FromRole="modulo" ToRole="session_certificado" />
+          <NavigationProperty Name="subcategoria" Relationship="Self.FK_subcategoria_modulo" FromRole="modulo" ToRole="subcategoria" />
+        </EntityType>
+        <EntityType Name="pregunta">
+          <Key>
+            <PropertyRef Name="pregunta_id" />
+          </Key>
+          <Property Name="pregunta_id" Type="Int32" Nullable="false" />
+          <Property Name="subcategoria_id" Type="Int32" Nullable="false" />
+          <Property Name="tipo_pregunta_id" Type="Int32" Nullable="false" />
+          <Property Name="enunciado_pregunta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="valor_pregunta" Type="Double" />
+          <Property Name="tiene_imagen" Type="Int32" />
+          <Property Name="imagen_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="subcategoria" Relationship="Self.FK_pregunta_subcategoria" FromRole="pregunta" ToRole="subcategoria" />
+          <NavigationProperty Name="tipo_pregunta" Relationship="Self.FK_pregunta_tipo_pregunta" FromRole="pregunta" ToRole="tipo_pregunta" />
+          <NavigationProperty Name="respuesta_pregunta" Relationship="Self.FK_respuesta_pregunta_pregunta" FromRole="pregunta" ToRole="respuesta_pregunta" />
+        </EntityType>
+        <EntityType Name="respuesta_pregunta">
+          <Key>
+            <PropertyRef Name="respuesta_pregunta_id" />
+          </Key>
+          <Property Name="respuesta_pregunta_id" Type="Int32" Nullable="false" />
+          <Property Name="pregunta_id" Type="Int32" Nullable="false" />
+          <Property Name="enunciado_respuesta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="respuesta_correcta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="pregunta" Relationship="Self.FK_respuesta_pregunta_pregunta" FromRole="respuesta_pregunta" ToRole="pregunta" />
+          <NavigationProperty Name="session_certificado" Relationship="Self.respuesta_usuario" FromRole="respuesta_pregunta" ToRole="session_certificado" />
+        </EntityType>
+        <EntityType Name="session_certificado">
+          <Key>
+            <PropertyRef Name="session_certificado_id" />
+          </Key>
+          <Property Name="session_certificado_id" Type="Int32" Nullable="false" />
+          <Property Name="modulo_id" Type="Int32" Nullable="false" />
+          <Property Name="inicio_session" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="final_session" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="certificado" Type="Int32" Nullable="false" />
+          <Property Name="ayuda50" Type="Int32" Nullable="false" />
+          <Property Name="ayuda_publico" Type="Int32" Nullable="false" />
+          <Property Name="ayuda_cambio" Type="Int32" Nullable="false" />
+          <Property Name="usuario_id" Type="Int32" />
+          <NavigationProperty Name="modulo" Relationship="Self.FK_session_certificado_modulo" FromRole="session_certificado" ToRole="modulo" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_session_certificado_usuario" FromRole="session_certificado" ToRole="usuario" />
+          <NavigationProperty Name="respuesta_pregunta" Relationship="Self.respuesta_usuario" FromRole="session_certificado" ToRole="respuesta_pregunta" />
+        </EntityType>
+        <EntityType Name="subcategoria">
+          <Key>
+            <PropertyRef Name="subcategoria_id" />
+          </Key>
+          <Property Name="subcategoria_id" Type="Int32" Nullable="false" />
+          <Property Name="modulo_id" Type="Int32" Nullable="false" />
+          <Property Name="nombre_subcategoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion_subcategoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="habilitada" Type="Int32" />
+          <NavigationProperty Name="modulo" Relationship="Self.FK_subcategoria_modulo" FromRole="subcategoria" ToRole="modulo" />
+          <NavigationProperty Name="pregunta" Relationship="Self.FK_pregunta_subcategoria" FromRole="subcategoria" ToRole="pregunta" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tipo_pregunta">
+          <Key>
+            <PropertyRef Name="tipo_pregunta_id" />
+          </Key>
+          <Property Name="tipo_pregunta_id" Type="Int32" Nullable="false" />
+          <Property Name="tipo_pregunta_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="pregunta" Relationship="Self.FK_pregunta_tipo_pregunta" FromRole="tipo_pregunta" ToRole="pregunta" />
+        </EntityType>
+        <EntityType Name="tipo_usuario">
+          <Key>
+            <PropertyRef Name="tipo_usuario_id" />
+          </Key>
+          <Property Name="tipo_usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="nombre_tipo_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.FK_usuario_tipo_usuario" FromRole="tipo_usuario" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="usuario_id" />
+          </Key>
+          <Property Name="usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="empresa_id" Type="Int32" Nullable="false" />
+          <Property Name="tipo_usuario_id" Type="Int32" Nullable="false" />
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="documento_identificacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sexo" Type="Int32" Nullable="false" />
+          <Property Name="fecha_registro" Type="DateTime" Precision="3" />
+          <Property Name="ultimo_ingreso" Type="DateTime" Precision="3" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="grupo_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="empresa" Relationship="Self.FK_usuario_empresa" FromRole="usuario" ToRole="empresa" />
+          <NavigationProperty Name="Grupo" Relationship="Self.FK_usuario_Grupo" FromRole="usuario" ToRole="Grupo" />
+          <NavigationProperty Name="matricula" Relationship="Self.FK_matricula_usuario" FromRole="usuario" ToRole="matricula" />
+          <NavigationProperty Name="session_certificado" Relationship="Self.FK_session_certificado_usuario" FromRole="usuario" ToRole="session_certificado" />
+          <NavigationProperty Name="tipo_usuario" Relationship="Self.FK_usuario_tipo_usuario" FromRole="usuario" ToRole="tipo_usuario" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_modulo_empresa">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="1" />
+          <End Role="modulo" Type="Self.modulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="empresa_id" />
+            </Principal>
+            <Dependent Role="modulo">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_empresa">
+          <End Role="empresa" Type="Self.empresa" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="empresa_id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_Grupo">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="id_grupo" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="grupo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_matricula_modulo">
+          <End Role="modulo" Type="Self.modulo" Multiplicity="1" />
+          <End Role="matricula" Type="Self.matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modulo">
+              <PropertyRef Name="modulo_id" />
+            </Principal>
+            <Dependent Role="matricula">
+              <PropertyRef Name="modulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_matricula_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="1" />
+          <End Role="matricula" Type="Self.matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="matricula">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_session_certificado_modulo">
+          <End Role="modulo" Type="Self.modulo" Multiplicity="1" />
+          <End Role="session_certificado" Type="Self.session_certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modulo">
+              <PropertyRef Name="modulo_id" />
+            </Principal>
+            <Dependent Role="session_certificado">
+              <PropertyRef Name="modulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_subcategoria_modulo">
+          <End Role="modulo" Type="Self.modulo" Multiplicity="1" />
+          <End Role="subcategoria" Type="Self.subcategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="modulo">
+              <PropertyRef Name="modulo_id" />
+            </Principal>
+            <Dependent Role="subcategoria">
+              <PropertyRef Name="modulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pregunta_subcategoria">
+          <End Role="subcategoria" Type="Self.subcategoria" Multiplicity="1" />
+          <End Role="pregunta" Type="Self.pregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="subcategoria">
+              <PropertyRef Name="subcategoria_id" />
+            </Principal>
+            <Dependent Role="pregunta">
+              <PropertyRef Name="subcategoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_pregunta_tipo_pregunta">
+          <End Role="tipo_pregunta" Type="Self.tipo_pregunta" Multiplicity="1" />
+          <End Role="pregunta" Type="Self.pregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_pregunta">
+              <PropertyRef Name="tipo_pregunta_id" />
+            </Principal>
+            <Dependent Role="pregunta">
+              <PropertyRef Name="tipo_pregunta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_respuesta_pregunta_pregunta">
+          <End Role="pregunta" Type="Self.pregunta" Multiplicity="1" />
+          <End Role="respuesta_pregunta" Type="Self.respuesta_pregunta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pregunta">
+              <PropertyRef Name="pregunta_id" />
+            </Principal>
+            <Dependent Role="respuesta_pregunta">
+              <PropertyRef Name="pregunta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_session_certificado_usuario">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="session_certificado" Type="Self.session_certificado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="usuario_id" />
+            </Principal>
+            <Dependent Role="session_certificado">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usuario_tipo_usuario">
+          <End Role="tipo_usuario" Type="Self.tipo_usuario" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_usuario">
+              <PropertyRef Name="tipo_usuario_id" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="tipo_usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="respuesta_usuario">
+          <End Role="respuesta_pregunta" Type="Self.respuesta_pregunta" Multiplicity="*" />
+          <End Role="session_certificado" Type="Self.session_certificado" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="QuienSabeMasDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="empresa" EntityType="Self.empresa" />
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" />
+          <EntitySet Name="matricula" EntityType="Self.matricula" />
+          <EntitySet Name="modulo" EntityType="Self.modulo" />
+          <EntitySet Name="pregunta" EntityType="Self.pregunta" />
+          <EntitySet Name="respuesta_pregunta" EntityType="Self.respuesta_pregunta" />
+          <EntitySet Name="session_certificado" EntityType="Self.session_certificado" />
+          <EntitySet Name="subcategoria" EntityType="Self.subcategoria" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="tipo_pregunta" EntityType="Self.tipo_pregunta" />
+          <EntitySet Name="tipo_usuario" EntityType="Self.tipo_usuario" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="FK_modulo_empresa" Association="Self.FK_modulo_empresa">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="modulo" EntitySet="modulo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_empresa" Association="Self.FK_usuario_empresa">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_Grupo" Association="Self.FK_usuario_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_matricula_modulo" Association="Self.FK_matricula_modulo">
+            <End Role="modulo" EntitySet="modulo" />
+            <End Role="matricula" EntitySet="matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_matricula_usuario" Association="Self.FK_matricula_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="matricula" EntitySet="matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_certificado_modulo" Association="Self.FK_session_certificado_modulo">
+            <End Role="modulo" EntitySet="modulo" />
+            <End Role="session_certificado" EntitySet="session_certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_subcategoria_modulo" Association="Self.FK_subcategoria_modulo">
+            <End Role="modulo" EntitySet="modulo" />
+            <End Role="subcategoria" EntitySet="subcategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pregunta_subcategoria" Association="Self.FK_pregunta_subcategoria">
+            <End Role="subcategoria" EntitySet="subcategoria" />
+            <End Role="pregunta" EntitySet="pregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_pregunta_tipo_pregunta" Association="Self.FK_pregunta_tipo_pregunta">
+            <End Role="tipo_pregunta" EntitySet="tipo_pregunta" />
+            <End Role="pregunta" EntitySet="pregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_respuesta_pregunta_pregunta" Association="Self.FK_respuesta_pregunta_pregunta">
+            <End Role="pregunta" EntitySet="pregunta" />
+            <End Role="respuesta_pregunta" EntitySet="respuesta_pregunta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_session_certificado_usuario" Association="Self.FK_session_certificado_usuario">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="session_certificado" EntitySet="session_certificado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_tipo_usuario" Association="Self.FK_usuario_tipo_usuario">
+            <End Role="tipo_usuario" EntitySet="tipo_usuario" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+          <AssociationSet Name="respuesta_usuario" Association="Self.respuesta_usuario">
+            <End Role="respuesta_pregunta" EntitySet="respuesta_pregunta" />
+            <End Role="session_certificado" EntitySet="session_certificado" />
+          </AssociationSet>
+          <FunctionImport Name="actualizar_session_certificado">
+            <Parameter Name="sessionId" Mode="In" Type="Int32" />
+            <Parameter Name="help50" Mode="In" Type="Int32" />
+            <Parameter Name="helpAud" Mode="In" Type="Int32" />
+            <Parameter Name="helpChange" Mode="In" Type="Int32" />
+            <Parameter Name="certification" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="crear_session_certificado">
+            <Parameter Name="modId" Mode="In" Type="Int32" />
+            <Parameter Name="help50" Mode="In" Type="Int32" />
+            <Parameter Name="helpAud" Mode="In" Type="Int32" />
+            <Parameter Name="helpChange" Mode="In" Type="Int32" />
+            <Parameter Name="timeSession" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="toReturnValue" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="insert_user_answer">
+            <Parameter Name="sessionId" Mode="In" Type="Int32" />
+            <Parameter Name="answerId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="read_user_tries" ReturnType="Collection(Int32)">
+            <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="moduleId" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QuienSabeMasDBModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QuienSabeMasDBModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuienSabeMasDBModelStoreContainer" CdmEntityContainer="QuienSabeMasDBEntities">
+          <EntitySetMapping Name="empresa">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.empresa">
+              <MappingFragment StoreEntitySet="empresa">
+                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="nombre_empresa" ColumnName="nombre_empresa" />
+                <ScalarProperty Name="descripcion_descripcion" ColumnName="descripcion_descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grupo">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.Grupo">
+              <MappingFragment StoreEntitySet="Grupo">
+                <ScalarProperty Name="id_grupo" ColumnName="id_grupo" />
+                <ScalarProperty Name="nombre_grupo" ColumnName="nombre_grupo" />
+                <ScalarProperty Name="habilitar_grupo" ColumnName="habilitar_grupo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="matricula">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.matricula">
+              <MappingFragment StoreEntitySet="matricula">
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
+                <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+                <ScalarProperty Name="intentos" ColumnName="intentos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="modulo">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.modulo">
+              <MappingFragment StoreEntitySet="modulo">
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
+                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
+                <ScalarProperty Name="nombre_modulo" ColumnName="nombre_modulo" />
+                <ScalarProperty Name="descripcion_modulo" ColumnName="descripcion_modulo" />
+                <ScalarProperty Name="tiempo_certificacion" ColumnName="tiempo_certificacion" />
+                <ScalarProperty Name="cantidad_preguntas" ColumnName="cantidad_preguntas" />
+                <ScalarProperty Name="habilitado" ColumnName="habilitado" />
+                <ScalarProperty Name="porcentaje_certificacion" ColumnName="porcentaje_certificacion" />
+                <ScalarProperty Name="score_model_id" ColumnName="score_model_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pregunta">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.pregunta">
+              <MappingFragment StoreEntitySet="pregunta">
+                <ScalarProperty Name="pregunta_id" ColumnName="pregunta_id" />
+                <ScalarProperty Name="subcategoria_id" ColumnName="subcategoria_id" />
+                <ScalarProperty Name="tipo_pregunta_id" ColumnName="tipo_pregunta_id" />
+                <ScalarProperty Name="enunciado_pregunta" ColumnName="enunciado_pregunta" />
+                <ScalarProperty Name="valor_pregunta" ColumnName="valor_pregunta" />
+                <ScalarProperty Name="tiene_imagen" ColumnName="tiene_imagen" />
+                <ScalarProperty Name="imagen_url" ColumnName="imagen_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="respuesta_pregunta">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.respuesta_pregunta">
+              <MappingFragment StoreEntitySet="respuesta_pregunta">
+                <ScalarProperty Name="respuesta_pregunta_id" ColumnName="respuesta_pregunta_id" />
+                <ScalarProperty Name="pregunta_id" ColumnName="pregunta_id" />
+                <ScalarProperty Name="enunciado_respuesta" ColumnName="enunciado_respuesta" />
+                <ScalarProperty Name="respuesta_correcta" ColumnName="respuesta_correcta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="session_certificado">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.session_certificado">
+              <MappingFragment StoreEntitySet="session_certificado">
+                <ScalarProperty Name="session_certificado_id" ColumnName="session_certificado_id" />
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
+                <ScalarProperty Name="inicio_session" ColumnName="inicio_session" />
+                <ScalarProperty Name="final_session" ColumnName="final_session" />
+                <ScalarProperty Name="certificado" ColumnName="certificado" />
+                <ScalarProperty Name="ayuda50" ColumnName="ayuda50" />
+                <ScalarProperty Name="ayuda_publico" ColumnName="ayuda_publico" />
+                <ScalarProperty Name="ayuda_cambio" ColumnName="ayuda_cambio" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subcategoria">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.subcategoria">
+              <MappingFragment StoreEntitySet="subcategoria">
+                <ScalarProperty Name="subcategoria_id" ColumnName="subcategoria_id" />
+                <ScalarProperty Name="modulo_id" ColumnName="modulo_id" />
+                <ScalarProperty Name="nombre_subcategoria" ColumnName="nombre_subcategoria" />
+                <ScalarProperty Name="descripcion_subcategoria" ColumnName="descripcion_subcategoria" />
+                <ScalarProperty Name="habilitada" ColumnName="habilitada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_pregunta">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.tipo_pregunta">
+              <MappingFragment StoreEntitySet="tipo_pregunta">
+                <ScalarProperty Name="tipo_pregunta_id" ColumnName="tipo_pregunta_id" />
+                <ScalarProperty Name="tipo_pregunta_nombre" ColumnName="tipo_pregunta_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_usuario">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.tipo_usuario">
+              <MappingFragment StoreEntitySet="tipo_usuario">
+                <ScalarProperty Name="tipo_usuario_id" ColumnName="tipo_usuario_id" />
+                <ScalarProperty Name="nombre_tipo_usuario" ColumnName="nombre_tipo_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="QuienSabeMasDBModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
+                <ScalarProperty Name="tipo_usuario_id" ColumnName="tipo_usuario_id" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="documento_identificacion" ColumnName="documento_identificacion" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="fecha_registro" ColumnName="fecha_registro" />
+                <ScalarProperty Name="ultimo_ingreso" ColumnName="ultimo_ingreso" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="grupo_id" ColumnName="grupo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="respuesta_usuario" TypeName="QuienSabeMasDBModel.respuesta_usuario" StoreEntitySet="respuesta_usuario">
+            <EndProperty Name="respuesta_pregunta">
+              <ScalarProperty Name="respuesta_pregunta_id" ColumnName="respuesta_pregunta_id" />
+            </EndProperty>
+            <EndProperty Name="session_certificado">
+              <ScalarProperty Name="session_certificado_id" ColumnName="session_certificado_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="actualizar_session_certificado" FunctionName="QuienSabeMasDBModel.Store.actualizar_session_certificado" />
+          <FunctionImportMapping FunctionImportName="crear_session_certificado" FunctionName="QuienSabeMasDBModel.Store.crear_session_certificado" />
+          <FunctionImportMapping FunctionImportName="insert_user_answer" FunctionName="QuienSabeMasDBModel.Store.insert_user_answer" />
+          <FunctionImportMapping FunctionImportName="read_user_tries" FunctionName="QuienSabeMasDBModel.Store.read_user_tries" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="QuienSabeMasDBModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="QuienSabeMasDBModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="QuienSabeMasDBModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="QuienSabeMasDBModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuienSabeMasDBModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="QuienSabeMasDBModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QuienSabeMasDBModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QuienSabeMasDBModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QuienSabeMasDBModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

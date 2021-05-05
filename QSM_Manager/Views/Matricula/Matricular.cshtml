@@ -1,0 +1,41 @@
+﻿@model IEnumerable<QSM_Manager.Models.usuario>
+
+@{
+    ViewBag.Title = "Matricular";
+}
+
+<h2>Matricular</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellidos)
+        </th>
+        <th>
+            Documento
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.documento_identificacion)
+            </td>
+            <td>
+                @Html.ActionLink("Matricular", "ConfirmarMatricula", new { userid = item.usuario_id, modId = ViewBag.moduloId })
+            </td>
+        </tr>
+    }
+
+</table>
